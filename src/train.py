@@ -1,6 +1,6 @@
 from pathlib import Path
 
-import matplotlib.pyplot as     
+import matplotlib.pyplot as plt
 import tensorflow as tf
 
 from cnn import model
