@@ -13,6 +13,7 @@ train_ds = tf.keras.utils.image_dataset_from_directory(
     shuffle=True,
     validation_split=0.3,
     subset="training",
+    seed=42,
 )
 
 temp_ds = tf.keras.utils.image_dataset_from_directory(
@@ -22,6 +23,7 @@ temp_ds = tf.keras.utils.image_dataset_from_directory(
     shuffle=True,
     validation_split=0.3,
     subset="validation",
+    seed=42,
 )
 val_ds = temp_ds.take(len(temp_ds) // 2)
 test_ds = temp_ds.skip(len(temp_ds) // 2)
@@ -43,3 +45,8 @@ data_augmentation = tf.keras.Sequential([
 train_ds = train_ds.map(
     lambda x, y: (data_augmentation(x, training=True), y)
 )
+
+AUTOTUNE = tf.data.AUTOTUNE
+train_ds = train_ds.prefetch(AUTOTUNE)
+val_ds = val_ds.prefetch(AUTOTUNE)
+test_ds = test_ds.prefetch(AUTOTUNE)
