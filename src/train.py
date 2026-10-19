@@ -58,8 +58,19 @@ history = model.fit(
     callbacks=[early_stopping, reduce_learning_rate],
 )
 
+
 plot_training_history(history)
 
+# Save the trained model
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+model_path = OUTPUT_DIR / "cnn_model.keras"
+model.save(model_path)
+
+print(f"Model saved to: {model_path}")
+
+# Evaluate the trained model on the test dataset
 test_loss, test_accuracy = model.evaluate(test_ds, verbose=0)
+
 print(f"Test loss: {test_loss:.4f}")
 print(f"Test accuracy: {test_accuracy:.4f}")
+
