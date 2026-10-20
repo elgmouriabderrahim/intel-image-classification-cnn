@@ -1,0 +1,18 @@
+services:
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./models:/app/models:ro
+    environment:
+      STREAMLIT_SERVER_HEADLESS: "true"
+    command:
+      - streamlit
+      - run
+      - dashboard/app.py
+      - --server.address=0.0.0.0
+      - --server.port=8501
+    restart: unless-stopped

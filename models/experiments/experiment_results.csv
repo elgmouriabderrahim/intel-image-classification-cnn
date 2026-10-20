@@ -1,0 +1,4 @@
+experiment,dropout,learning_rate,epochs_trained,best_epoch,best_val_loss,val_accuracy_at_best_loss,model_path
+baseline,0.3,0.001,19,14,0.6112226247787476,0.7710937261581421,/home/elgmouri/projects/intel-image-classification-cnn/models/experiments/baseline.keras
+dropout_050,0.5,0.001,19,14,0.5559171438217163,0.80078125,/home/elgmouri/projects/intel-image-classification-cnn/models/experiments/dropout_050.keras
+lr_0003,0.3,0.0003,28,23,0.8117666244506836,0.698046863079071,/home/elgmouri/projects/intel-image-classification-cnn/models/experiments/lr_0003.keras

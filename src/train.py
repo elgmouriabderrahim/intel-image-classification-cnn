@@ -1,14 +1,15 @@
+import json
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import tensorflow as tf
 
 from cnn import model
-from prepare_data import test_ds, train_ds, val_ds
+from prepare_data import CLASS_NAMES, test_ds, train_ds, val_ds
 
 
 EPOCHS = 30
-OUTPUT_DIR = Path(__file__).resolve().parent.parent / "outputs"
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "models"
 
 
 def plot_training_history(history: tf.keras.callbacks.History) -> None:
@@ -58,8 +59,26 @@ history = model.fit(
     callbacks=[early_stopping, reduce_learning_rate],
 )
 
+
 plot_training_history(history)
 
+# Save the trained model
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+model_path = OUTPUT_DIR / "cnn_model.keras"
+model.save(model_path)
+
+class_names_path = OUTPUT_DIR / "class_names.json"
+class_names_path.write_text(
+    json.dumps(CLASS_NAMES, indent=2) + "\n",
+    encoding="utf-8",
+)
+
+print(f"Model saved to: {model_path}")
+print(f"Class names saved to: {class_names_path}")
+
+# Evaluate the trained model on the test dataset
 test_loss, test_accuracy = model.evaluate(test_ds, verbose=0)
+
 print(f"Test loss: {test_loss:.4f}")
 print(f"Test accuracy: {test_accuracy:.4f}")
+
