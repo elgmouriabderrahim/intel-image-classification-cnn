@@ -20,7 +20,7 @@ temp_ds = tf.keras.utils.image_dataset_from_directory(
     DATA_DIR,
     image_size=(150, 150),
     batch_size=32,
-    shuffle=False,
+    shuffle=True,
     validation_split=0.3,
     subset="validation",
     seed=42,

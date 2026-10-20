@@ -8,7 +8,7 @@ from prepare_data import test_ds, train_ds, val_ds
 
 
 EPOCHS = 30
-OUTPUT_DIR = Path(__file__).resolve().parent.parent / "outputs"
+OUTPUT_DIR = Path(__file__).resolve().parent.parent / "models"
 
 
 def plot_training_history(history: tf.keras.callbacks.History) -> None:
